@@ -56,7 +56,7 @@ Total        1705      4 084 766
                 </executions>
                 <configuration>
                     <isActive>true</isActive>
-                    <includeFileExtensions>java, xml, properties, yml, json, md, sql, txt, html, css, js, jsp, jsf, class</includeFileExtensions>
+                    <includeFileExtensions>java, xml, properties, yml, json, md, sql, txt, html, css, js, jsp, jsf</includeFileExtensions>
                     <exludeDirectories>target, .git, .idea, .mvn</exludeDirectories>
                 </configuration>
             </plugin>
