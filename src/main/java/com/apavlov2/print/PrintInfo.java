@@ -1,4 +1,4 @@
-package com.apavlov2;
+package com.apavlov2.print;
 
 import com.apavlov2.file.ExtInfo;
 import org.apache.maven.project.MavenProject;
