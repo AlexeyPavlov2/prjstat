@@ -21,9 +21,7 @@ public class FileUtil {
     }
 
     private static void getContent(File Directory, int Indents, List<FileInfo> list) {
-        //for (int i = 0; i < Indents; i++) System.out.print("\t");
         if (Directory.isFile()) {
-            //System.out.println(Directory.getName());
             list.add(new FileInfo()
                     .setName(Directory.getName())
             .setPath(Directory.getAbsolutePath())
@@ -31,7 +29,6 @@ public class FileUtil {
             .setSize(Directory.length()));
         }
         else {
-            //System.out.println(Directory.getName());
             File[] SubDirectory = Directory.listFiles();
             for (File SubWay : SubDirectory)
                 getContent(SubWay, Indents + 1, list);

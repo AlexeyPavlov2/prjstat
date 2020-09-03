@@ -1,41 +1,21 @@
 package com.apavlov2;
 
-/*
- * Copyright 2001-2005 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 import com.apavlov2.file.ExtInfo;
-import com.apavlov2.file.FileUtil;
 import com.apavlov2.file.FileInfo;
-import com.google.inject.Inject;
-import com.google.inject.internal.util.ImmutableMap;
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.execution.MavenSession;
+import com.apavlov2.file.FileUtil;
+import com.apavlov2.print.PrintInfo;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static org.apache.maven.artifact.ArtifactUtils.key;
 
 @Mojo(name = "project-statistic", defaultPhase = LifecyclePhase.INSTALL)
 public class ProjectStatisticMojo extends AbstractMojo {
@@ -68,7 +48,7 @@ public class ProjectStatisticMojo extends AbstractMojo {
 
         List<FileInfo> fileInfoList = FileUtil.getTreeFiles(project.getBasedir().getAbsolutePath())
                 .stream()
-                .filter(el -> el.getExtension() != null ? includeFileExtMap.containsKey(el.getExtension()) : true)
+                .filter(el -> el.getExtension() == null || includeFileExtMap.containsKey(el.getExtension()))
                 .filter(el -> getItemsFromString(exludeDirectories == null ? EXCLUDE_DIRICTORIES : exludeDirectories).stream().noneMatch(dir -> el.getPath().contains(dir)))
                 .collect(Collectors.toList());
 
